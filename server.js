@@ -17,12 +17,10 @@ app.use(express.static("public"));
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-
-
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
-mongoose.connect(MONGODB_URI);
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 var results = [];
 // Start routes here...
 app.get("/scrape", function (req, res) {  
@@ -35,21 +33,22 @@ app.get("/scrape", function (req, res) {
                 author: author,
                 headline: headline
             });
+            db.Article.create(results)
+            .then(function(dbArticle) {
+                console.log(dbArticle);
+            })
+            .catch(function(err) {
+                console.log(err);
+            })
 
         });
 
-
-
-
-
-        res.send("Scrape complete!")
+        res.json(results)
         console.log(results);
-
     })
+});
 
-
-})
-
+app.get("/")
 
 app.listen(PORT, function () {
     console.log("Server listening on: http://localhost:" + PORT);
