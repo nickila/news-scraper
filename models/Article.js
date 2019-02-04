@@ -4,13 +4,22 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var ArticleSchema = new Schema ({
+    photoText: {
+        type: String,
+        required: false
+    },
+    link: {
+        type: String,
+        required: false
+    },
+
+    subtitle: {
+        type: String,
+        required: false
+    },
     headline: {
         type: String,
-        required: true
-    },
-    author: {
-        type: String,
-        required: true,
+        required: false
     },
     
     note: {
