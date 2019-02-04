@@ -4,29 +4,26 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var ArticleSchema = new Schema ({
-    photoText: {
+    headline: {
+        type: String,
+        required: true
+    },
+    summaryOne: {
+        type: String,
+        required: true
+    },
+    summaryTwo: {
         type: String,
         required: false
     },
     link: {
         type: String,
-        required: false
+        required: true
     },
-
-    subtitle: {
-        type: String,
-        required: false
-    },
-    headline: {
-        type: String,
-        required: false
-    },
-    
     note: {
         type: Schema.Types.ObjectId,
         ref: "Note"
     }
-    
 });
 
 var Article = mongoose.model("Article", ArticleSchema);

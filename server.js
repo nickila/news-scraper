@@ -23,30 +23,6 @@ var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 var results = [];
 // Start routes here...
-// app.get("/scrape", function (req, res) {
-//     axios.get("https://www.nytimes.com/").then(function (response) {
-//         var $ = cheerio.load(response.data)
-//         $("div.css-omcqsq").each(function (i, element) {
-//             var author = $(element).children().text();
-//             var headline = $(element).siblings().text();
-//             results.push({
-//                 author: author,
-//                 headline: headline
-//             });
-//             db.Article.create(results)
-//                 .then(function (dbArticle) {
-//                     console.log(dbArticle);
-//                 })
-//                 .catch(function (err) {
-//                     console.log(err);
-//                 })
-
-//         });
-
-//         res.json(results)
-//         console.log(results);
-//     })
-// });
 
 app.get("/newscrape", function (req, res) {
     axios.get("https://www.nytimes.com/").then(function (response) {
@@ -54,37 +30,26 @@ app.get("/newscrape", function (req, res) {
         $("h2 span").each(function (i, element) {
             var headline = $(element).text();
             var link = $(element).parents("a").attr("href");
-            var subtitle = $(element).parent().parent().siblings().children().text();
-            //var headline = $(element).children("h2").text();
-            // var img = $(element).children().children().children().children("img").attr("src");
-            // if (photoText && link && subtitle) {
-            // var headline = $(element).children().text();
-            // var headline = $(element).siblings().text();
-            // results.push({
-            //     link: link,
-            //     photoText: photoText,
-            //     subtitle: subtitle,
-            //     headline: headline
-            //     // });
-
-            // })
-            // db.Article.create(results)
-            //     .then(function (dbArticle) {
-            //         console.log(dbArticle);
-            //     })
-            //     .catch(function (err) {
-            //         console.log(err);
-            //     })
-            console.log(headline);
+            var summaryOne = $(element).parent().parent().siblings().children("li:first-child").text();
+            var summaryTwo = $(element).parent().parent().siblings().children("li:last-child").text();
             
-            console.log(subtitle);
-            console.log(link);
-            console.log("_________");
-            
+            if (headline && summaryOne && link) {
+                results.push({
+                    headline: headline,
+                    summaryOne: summaryOne,
+                    summaryTwo: summaryTwo,
+                    link: link
+                })
+                db.Article.create(results)
+                    .then(function (dbArticle) {
+                        console.log(dbArticle);
+                    })
+                    .catch(function (err) {
+                        console.log(err);
+                    })
+            }
         });
-
-        // res.json(results)
-        // console.log(results);
+        res.json(results)
     })
 });
 
