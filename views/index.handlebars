@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h1 id="title">NEWS SCRAPER IS GO</h1>
+            <button id="scrapeBtn">SCRAPE</button>
+            <div id="articles">
+                {{#each results}}
+                <div class="article">
+                <h2 class="headline">{{headline}}</h2>
+                <ul>
+                    <li>{{summaryOne}}</li>
+                    <li>{{summaryTwo}}</li>
+                </ul>
+                <a href={{link}} >Full Story</a>
+                </div>
+                {{/each}}              
+            </div>
+        </div>
+    </div>
+</div>

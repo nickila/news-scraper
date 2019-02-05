@@ -1,0 +1,13 @@
+body {
+    background-color: rgb(243, 243, 235);
+}
+
+li {
+    text-align: justify;
+}
+
+.article {
+    margin-bottom: 25px;
+    margin-top: 25px;
+
+}
