@@ -18,8 +18,8 @@
                     </ul>
                     <p>{{_id}}</p>
                     <a href={{link}}>Full Story</a>
-                    <form action="/update" method="PUT">
-                        <input type="hidden" name="id" id="save-article" value={{_id}}>
+                    <form action="/update" method="PUT" id="save-article">
+                        <input type="hidden" name="id" value={{_id}}>
                         <button class="btn btn-warning btn-sm"  type="submit">{{_id}}</button>
                         <hr />
                     </form>
@@ -42,19 +42,21 @@
         $("#save-article").on("click", function (event) {
             event.preventDefault();
             console.log("save it!");
-            var id = $(this).val();
+            var id = $(this).children().val();
             console.log(id);
-            var newSavedState = {
-                saved: true
+            var data = {
+                _id: id
             }
             $.ajax("/update/" + id, {
                 type: "PUT",
-                data: newSavedState
+                data: data
             }).then(function () {
                 $(document).ajaxStop(function () {
                     window.location.reload();
                 });
             })
+            
         });
     });
 </script>
+

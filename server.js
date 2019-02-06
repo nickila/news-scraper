@@ -58,21 +58,27 @@ app.get("/", function (req, res) {
     })
 });
 
-app.get("/update", function (req, res) {
+app.put("/update/:id", function (req, res) {
 // console.log(req.params);
     console.log("##########################################");
     console.log(" ");
     console.log(" ")
     console.log("##########################################");
     console.log(req.params);
-    db.Article.updateOne(savedArticle)
-    .then(function (dbSaved) {
-        console.log(dbSaved);
+    db.Article.updateOne({ _id: req.params.id }, { $set: { saved: true } }, function(err, result) {
+        if (result.changedRows == 0) { 
+        return res.status(404).end();
+    } else {
+        res.status(200).end();
+    }
+});
+    // .then(function (dbSaved) {
+    //     console.log(dbSaved);
 
-    })
-    .catch(function (err) {
-        console.log(err);
-    })
+    // })
+    // .catch(function (err) {
+    //     console.log(err);
+    // })
 
     // db.Article.updateOne({ _id: req.params.id }, { $set: { saved: true } }, function (err, result) {
     //     if (result.changedRows == 0) {
