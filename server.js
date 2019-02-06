@@ -3,7 +3,7 @@ var exphbs = require("express-handlebars");
 var mongoose = require("mongoose");
 var axios = require("axios");
 var cheerio = require("cheerio");
-
+var router = express.Router();
 var db = require("./models")
 
 var PORT = 3000;
@@ -24,10 +24,6 @@ var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 var results = [];
 // Start routes here...
-// var dbArticle;
-// app.get("/", function (req, res) {
-//     res.render("index", {dbArticle})
-// })
 
 app.get("/", function (req, res) {
     axios.get("https://www.nytimes.com/").then(function (response) {
@@ -46,41 +42,46 @@ app.get("/", function (req, res) {
                     summaryTwo: summaryTwo,
                     link: link
                 })
-
             }
         });
         db.Article.create(results)
             .then(function (dbArticle) {
                 res.render("index", { dbArticle });
-                console.log(dbArticle); //this is the one with the _id
+                console.log(dbArticle);
             })
             .catch(function (err) {
                 console.log(err);
             })
-            app.get("/", function (req, res) {
-                res.render("index")
-            })
-        //console.log(results) //this is just the stuff being loaded into the db (no _id)
-
-        // res.render("index", { results });
+        app.get("/", function (req, res) {
+            res.render("index")
+        })
     })
 });
 
-// app.put('/events/update/:id', function(req,res){
-//     const data = req.body; 
-//     db.events.update({_id: ObjectId(req.params.id)}, {$set: data},function(err, result){
-//         if(err){
-//             console.log(err);
-//         }
-//         res.send('updated successfully');
-//     });
-// });
-app.get("/update/", function (req, res) {
-    // res.send("Here I is!")
+app.get("/update", function (req, res) {
+// console.log(req.params);
     console.log("##########################################");
-    console.log("             *         *    ");
-    console.log("                  U         ")
+    console.log(" ");
+    console.log(" ")
     console.log("##########################################");
+    console.log(req.params);
+    db.Article.updateOne(savedArticle)
+    .then(function (dbSaved) {
+        console.log(dbSaved);
+
+    })
+    .catch(function (err) {
+        console.log(err);
+    })
+
+    // db.Article.updateOne({ _id: req.params.id }, { $set: { saved: true } }, function (err, result) {
+    //     if (result.changedRows == 0) {
+    //         return res.status(404).end();
+    //     } else {
+    //         res.status(200).end();
+    //     }
+
+    // });
     // var data = req.body;
     // console.log(data);
     // console.log(req.params);
@@ -94,29 +95,38 @@ app.get("/update/", function (req, res) {
     // }).fail(function(response) {
     //     console.log("Not working")
     // })
-    db.Article.updateOne({_id: req.params.id}, {$set: {saved: true}}, function(err, result) {
-        if (err) {
-            console.log(err);
 
-        }
-        res.send("Saved successfully!");
-    })
-    
-    console.log(req);
-    console.log(res);
-    var savedArticle = {
-        saved: true
-    }
+    // router.put("/api/burgers/:id", function (req, res) {
+    //     console.log(req.params)
 
-    db.Article.updateOne(savedArticle)
-        .then(function (dbSaved) {
-            console.log(dbSaved);
+    //     var condition = "id=" + req.params.id;
+    //     burger.update({
+    //         devoured: req.body.devoured
+    //     }, condition, function (result) {
+    //         if (result.changedRows == 0) {
+    //             return res.status(404).end();
+    //         } else {
+    //             res.status(200).end();
+    //         }
 
-        })
-        .catch(function (err) {
-            console.log(err);
-        })
+    //     });
 
+    // });
+    // db.Article.updateOne({ _id: req.params.id }, { $set: { saved: true } }, function (err, result) {
+    //     if (err) {
+    //         console.log(err);
+
+    //     }
+    //     res.send("Saved successfully!");
+    // })
+
+    // console.log(req);
+    // console.log(res);
+    // var savedArticle = {
+    //     saved: true
+    // }
+
+   
     // db.Article.create(results)
     //     .then(function (dbArticle) {
     //         console.log(dbArticle);
