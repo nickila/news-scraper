@@ -1,19 +1,38 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6">
+            <a href="#">Saved Articles</a>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
             <h1 id="title">NEWS SCRAPER IS GO</h1>
             <button id="scrapeBtn">SCRAPE</button>
             <div id="articles">
-                {{#each results}}
+                {{#each dbArticle}}
                 <div class="article">
-                <h2 class="headline">{{headline}}</h2>
-                <ul>
-                    <li>{{summaryOne}}</li>
-                    <li>{{summaryTwo}}</li>
-                </ul>
-                <a href={{link}} >Full Story</a>
+                    <h2 class="headline">{{headline}}</h2>
+                    <ul>
+                        <li>{{summaryOne}}</li>
+                        <li>{{summaryTwo}}</li>
+                    </ul>
+                    <p>{{_id}}</p>
+                    <a href={{link}}>Full Story</a>
+                    <form action="/update" method="PUT" id="save-article">
+                        <input type="hidden" name="id" value={{_id}}>
+                        <button class="btn btn-warning btn-sm" type="submit">SAVE ARTICLE</button>
+                        <hr />
+                    </form>
+                    {{!-- <li>{{id}} {{burger_name}}
+                        <form action="/update" method="PUT" id="update-form">
+                            <input type="hidden" name="id" value="{{this.id}}">
+                            <button class="btn btn-warning btn-sm" type="submit">DEVOUR</button>
+                            <hr />
+                        </form>
+                    </li> --}}
                 </div>
-                {{/each}}              
+                {{/each}}
             </div>
         </div>
     </div>

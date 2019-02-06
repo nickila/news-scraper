@@ -26,7 +26,7 @@ var results = [];
 // Start routes here...
 
 app.get("/", function (req, res) {
-    res.render("index", {results})
+    res.render("index")
 })
 
 app.get("/newscrape", function (req, res) {
@@ -49,20 +49,47 @@ app.get("/newscrape", function (req, res) {
 
             }
         });
-        console.log(results)
-        res.render("index", {results});
+        db.Article.create(results)
+            .then(function (dbArticle) {
+                res.render("index", { dbArticle });
+                console.log(dbArticle); //this is the one with the _id
+            })
+            .catch(function (err) {
+                console.log(err);
+            })
+            app.get("/", function (req, res) {
+                res.render("index")
+            })
+        //console.log(results) //this is just the stuff being loaded into the db (no _id)
+
+        // res.render("index", { results });
     })
 });
-app.get("/savedarticle", function (req, res) {
+app.post("/update", function (req, res, next) {
+    console.log("Line 67");
+    console.log(req);
+    console.log(res);
+    var savedArticle = {
+        _id: req,
+        saved: true
+    }
 
+    db.Article.updateOne(savedArticle)
+        .then(function (dbSaved) {
+            console.log(dbSaved);
 
-    db.Article.create(results)
-        .then(function (dbArticle) {
-            console.log(dbArticle);
         })
         .catch(function (err) {
             console.log(err);
         })
+
+    // db.Article.create(results)
+    //     .then(function (dbArticle) {
+    //         console.log(dbArticle);
+    //     })
+    //     .catch(function (err) {
+    //         console.log(err);
+    //     })
 
 
 })
