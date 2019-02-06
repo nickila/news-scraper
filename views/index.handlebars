@@ -19,9 +19,9 @@
                     </ul>
                     <p>{{_id}}</p>
                     <a href={{link}}>Full Story</a>
-                    <form action="/update" method="PUT" id="save-article">
-                        <input type="hidden" name="id" value={{_id}}>
-                        <button class="btn btn-warning btn-sm" type="submit">SAVE ARTICLE</button>
+                    <form action="/update/" method="PUT">
+                        <input type="hidden" name="id" id="id" value={{_id}}>
+                        <button class="btn btn-warning btn-sm" id="save-article" type="submit">{{_id}}</button>
                         <hr />
                     </form>
                     {{!-- <li>{{id}} {{burger_name}}
@@ -37,3 +37,89 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+
+        $("#scrapeBtn").on("click", function (event) {
+            event.preventDefault();
+
+            $.get("/newscrape", function (data) {
+                location.reload();
+
+            });
+        });
+
+        $("#save-article").on("click", function (event) {
+            event.preventDefault();
+            console.log("save it!");
+            var id = $(this).val();
+            var newSaved = true;
+            console.log(id);
+            var newSavedState = {
+                saved: newSaved
+            };
+
+            $.ajax({
+                type: "PUT",
+                url: "/update/" + id,
+                data: { saved: newSavedState }
+            }).then(
+                function () {
+                    $(document).ajaxStop(function () {
+                        window.location.reload();
+                    });
+                }
+            );
+
+
+            // function editEvent(){
+            //     var change = prompt('Change to:', '');
+
+            //         $.ajax({
+            //             type:'PUT',
+            //             url: '/events/update/'+$(this).data('id'),
+            //             data: {event_name: change}
+            //         }).done(function(response){
+            //             console.log(response);
+            //             window.location.replace('http://localhost:3030/');
+            //         }).fail(function(response){
+            //             console.log("Oops not working");
+            //         });
+
+
+
+
+            // $.ajax("/update:" + id, {
+            //     type: "PUT",
+            //     data: newSavedState
+
+            // })
+            // .then(
+            //     function () {
+            //         location.reload();
+            //     });
+            // var newSaved = true;
+            // console.log(id);
+            // var newSavedState = {
+            //     saved: newSaved
+            // };
+            // console.log(newSaved)
+            // $.ajax("/update:" + id, {
+            //     type: "PUT",
+            //     data: newSavedState
+
+            // }).then(
+            //     function () {
+            //         location.reload();
+            //     });
+        });
+    });
+
+
+
+
+
+
+
+
+</script>

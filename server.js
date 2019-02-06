@@ -24,12 +24,12 @@ var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 var results = [];
 // Start routes here...
+// var dbArticle;
+// app.get("/", function (req, res) {
+//     res.render("index", {dbArticle})
+// })
 
 app.get("/", function (req, res) {
-    res.render("index")
-})
-
-app.get("/newscrape", function (req, res) {
     axios.get("https://www.nytimes.com/").then(function (response) {
         var $ = cheerio.load(response.data)
         $("h2 span").each(function (i, element) {
@@ -65,12 +65,46 @@ app.get("/newscrape", function (req, res) {
         // res.render("index", { results });
     })
 });
-app.post("/update", function (req, res, next) {
-    console.log("Line 67");
+
+// app.put('/events/update/:id', function(req,res){
+//     const data = req.body; 
+//     db.events.update({_id: ObjectId(req.params.id)}, {$set: data},function(err, result){
+//         if(err){
+//             console.log(err);
+//         }
+//         res.send('updated successfully');
+//     });
+// });
+app.get("/update/", function (req, res) {
+    // res.send("Here I is!")
+    console.log("##########################################");
+    console.log("             *         *    ");
+    console.log("                  U         ")
+    console.log("##########################################");
+    // var data = req.body;
+    // console.log(data);
+    // console.log(req.params);
+    // $.ajax({
+    //     type: "PUT",
+    //     url: "/update/" + id,
+    //     data: {saved: change}
+    // }).then(function(response) {
+    //     console.log(response);
+    //     window.location.replace("/");
+    // }).fail(function(response) {
+    //     console.log("Not working")
+    // })
+    db.Article.updateOne({_id: req.params.id}, {$set: {saved: true}}, function(err, result) {
+        if (err) {
+            console.log(err);
+
+        }
+        res.send("Saved successfully!");
+    })
+    
     console.log(req);
     console.log(res);
     var savedArticle = {
-        _id: req,
         saved: true
     }
 
