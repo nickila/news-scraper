@@ -22,9 +22,9 @@
                 </form>
             </div>
             <div id="noteDiv">
-                
-                <p>{{note}}</p>
-                
+                {{#each note}}
+                <p>{{this}}</p>
+                {{/each}}
             </div>
             {{/each}}
         </div>
