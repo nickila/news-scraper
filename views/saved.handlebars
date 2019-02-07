@@ -10,16 +10,21 @@
                     <li>{{summaryTwo}}</li>
                 </ul>
                 <a href={{link}}>Full Story</a>
-                {{!-- <form action="/update" method="PUT" id="delete-article">
+                <form action="/unsave" method="PUT" id="delete-article">
                     <input type="hidden" name="id" value={{_id}}>
                     <button class="btn btn-danger btn-sm" type="submit">DELETE</button>
                     <hr />
-                </form> --}}
+                </form>
                 <form action="/newnote" method="PUT"  id="new-note">
                         <input type="hidden" value={{_id}}>
                         <input type="name" class="form-control" id="message" >
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
+            </div>
+            <div id="noteDiv">
+                
+                <p>{{note}}</p>
+                
             </div>
             {{/each}}
         </div>
@@ -44,6 +49,22 @@
                 url: "/newnote/",
                 data: data
             })
+            location.reload();
+        $("#message").val("");
+        });
+        $("#delete-article").on("click", function (event) {
+            event.preventDefault();
+            console.log("delete it!");
+            var id = $(this).children().val();
+            console.log(id);
+            var data = {
+                _id: id
+            }
+            $.ajax("/unsave/" + id, {
+                type: "PUT",
+                data: data
+            })
+            location.reload();
 
         });
         
