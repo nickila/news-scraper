@@ -24,7 +24,9 @@ var ArticleSchema = new Schema ({
         type: Boolean,
         default: false
     },
-    note: []
+    note: {
+        type: String,
+    }
     
 });
 

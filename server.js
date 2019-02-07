@@ -66,6 +66,7 @@ app.get("/newscrape", function (req, res) {
 });
 
 app.put("/update/:id", function (req, res) {
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!")
     db.Article.updateOne({ _id: req.params.id }, { $set: { saved: true } }, function (err, result) {
         if (result.changedRows == 0) {
             return res.status(404).end();
@@ -75,10 +76,11 @@ app.put("/update/:id", function (req, res) {
     });
 });
 
-app.put("/newnote/:id", function(req, res) {
+app.put("/newnote/", function(req, res) {
     console.log("**********************************")
-    console.log(req.params)
-    db.Article.updateOne({ _id: req.params.id }, { $push: { note: req.params.newNote }}, function(err, result) {
+    console.log(req.body)
+    // console.log(res);
+    db.Article.updateOne({ _id: req.body._id }, { $push: { note: req.body.note }}, function(err, result) {
         if (result.changedRows == 0) {
             return res.status(404).end();
         } else {
@@ -94,10 +96,6 @@ app.get("/saved", function (req, res) {
         savedArticles.push(saved)
         res.render("saved", { saved })
     })
-       
-    // app.get("/", function(req, res) {
-    //     res.render("index");
-    // })
 })
 
 

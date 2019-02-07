@@ -38,11 +38,14 @@
                 _id: id,
                 note: newNote
             }
-            $.ajax("/update/" + id, {
+            console.log(data);
+            $.ajax({
                 type: "PUT",
+                url: "/newnote/",
                 data: data
             })
 
         });
+        
     });
 </script>
