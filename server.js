@@ -3,10 +3,10 @@ var exphbs = require("express-handlebars");
 var mongoose = require("mongoose");
 var axios = require("axios");
 var cheerio = require("cheerio");
-var router = express.Router();
 var db = require("./models")
 
-var PORT = 3000;
+var port = process.env.PORT || 3000;
+
 var app = express();
 
 app.use(express.urlencoded({ extended: true }));
@@ -111,6 +111,6 @@ app.get("/saved", function (req, res) {
 })
 
 
-app.listen(PORT, function () {
-    console.log("Server listening on: http://localhost:" + PORT);
+app.listen(port, function () {
+    console.log("Server listening on: http://localhost:" + port);
 })
