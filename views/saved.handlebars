@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6" id="saved">
+            {{#each saved}}
+            <div class="article">
+                <h2 class="headline">{{headline}}</h2>
+                <ul>
+                    <li>{{summaryOne}}</li>
+                    <li>{{summaryTwo}}</li>
+                </ul>
+                <a href={{link}}>Full Story</a>
+                <form action="/update" method="PUT" id="delete-article">
+                    <input type="hidden" name="id" value={{_id}}>
+                    <button class="btn btn-danger btn-sm" type="submit">DELETE</button>
+                    <hr />
+                </form>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>

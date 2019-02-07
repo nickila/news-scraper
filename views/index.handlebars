@@ -1,34 +1,40 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-6">
-            <a href="#">Saved Articles</a>
+        <div class="col-md-12">
+            <h1 id="title">NEWS SCRAPER IS GO</h1>
+            <button id="scrapeBtn">SCRAPE</button>
+
         </div>
+        <a href="/saved">Saved Articles</a>
     </div>
     <div class="row">
         <div class="col-md-6">
-            <h1 id="title">NEWS SCRAPER IS GO</h1>
-            <button id="scrapeBtn">SCRAPE</button>
             <div id="articles">
-                {{#each dbArticle}}
+                {{#each result}}
+                {{#unless saved}}
                 <div class="article">
                     <h2 class="headline">{{headline}}</h2>
                     <ul>
                         <li>{{summaryOne}}</li>
                         <li>{{summaryTwo}}</li>
                     </ul>
-                    <p>{{_id}}</p>
                     <a href={{link}}>Full Story</a>
                     <form action="/update" method="PUT" id="save-article">
                         <input type="hidden" name="id" value={{_id}}>
-                        <button class="btn btn-warning btn-sm"  type="submit">{{_id}}</button>
+                        <button class="btn btn-warning btn-sm" type="submit">SAVE</button>
                         <hr />
                     </form>
                 </div>
+                {{/unless}}
                 {{/each}}
             </div>
         </div>
     </div>
 </div>
+
+
+
+
 <script>
     $(document).ready(function () {
 
@@ -50,13 +56,8 @@
             $.ajax("/update/" + id, {
                 type: "PUT",
                 data: data
-            }).then(function () {
-                $(document).ajaxStop(function () {
-                    window.location.reload();
-                });
             })
-            
+
         });
     });
 </script>
-
