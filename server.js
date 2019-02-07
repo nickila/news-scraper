@@ -22,16 +22,12 @@ app.set('index', __dirname + '/views');
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
-//var results = [];
+var results = [];
 
 // Start routes here...
 app.get("/", function (req, res) {
-    allArticles = [];
-
     db.Article.find({ saved: false }, function (err, result) {
         if (err) throw err;
-        allArticles.push(result)
-        console.log(allArticles);
         res.render("index", { result })
     })
 
@@ -63,9 +59,9 @@ app.get("/newscrape", function (req, res) {
             .catch(function (err) {
                 console.log(err);
             })
-        // app.get("/", function (req, res) {
-        //     res.render("index")
-        // })
+        app.get("/", function (req, res) {
+            res.render("index")
+        })
     })
 });
 
@@ -79,7 +75,17 @@ app.put("/update/:id", function (req, res) {
     });
 });
 
-
+app.put("/newnote/:id", function(req, res) {
+    console.log("**********************************")
+    console.log(req.params)
+    db.Article.updateOne({ _id: req.params.id }, { $push: { note: req.params.newNote }}, function(err, result) {
+        if (result.changedRows == 0) {
+            return res.status(404).end();
+        } else {
+            res.status(200).end();
+        } 
+    })
+})
 
 app.get("/saved", function (req, res) {
     var savedArticles = [];
