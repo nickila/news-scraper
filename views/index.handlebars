@@ -1,34 +1,40 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
-            <h1 id="title">NEWS SCRAPER IS GO</h1>
-            <button id="scrapeBtn">SCRAPE</button>
-
+        <div class="col-md-12" id="titleDiv">
+            <h1 id="title">NYTIMES SCRAPER</h1>
         </div>
-        <a href="/saved">Saved Articles</a>
+        <a href="/saved" class="upper-link">SAVED ARTICLES </a>
+        <a href="https://www.nytimes.com" class="upper-link"> NYTIMES.COM</a>
+        <button id="scrapeBtn">SCRAPE</button>
+
     </div>
+    <hr class="white-underline">
     <div class="row">
+        {{#each result}}
+        {{#unless saved}}
         <div class="col-md-6">
             <div id="articles">
-                {{#each result}}
-                {{#unless saved}}
+                
+                
                 <div class="article">
                     <h2 class="headline">{{headline}}</h2>
                     <ul>
-                        <li>{{summaryOne}}</li>
-                        <li>{{summaryTwo}}</li>
+                        <li class="summary">{{summaryOne}}</li>
+                        <li class="summary">{{summaryTwo}}</li>
                     </ul>
-                    <a href={{link}}>Full Story</a>
+                    <hr>
+                    <a href={{link}} class="link">Full Story</a>
                     <form action="/update" method="PUT" id="save-article">
                         <input type="hidden" name="id" value={{_id}}>
                         <button class="btn btn-warning btn-sm" type="submit">SAVE</button>
-                        <hr />
+                        
                     </form>
                 </div>
-                {{/unless}}
-                {{/each}}
+                
             </div>
         </div>
+        {{/unless}}
+                {{/each}}
     </div>
 </div>
 
