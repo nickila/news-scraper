@@ -9,44 +9,57 @@
             <a href="/" class="upper-link">HOME</a>
         </div>
         <div class="col-md-4">
-            <button class="btn btn-primary btn-sm" id="scrapeBtn">SCRAPE</button>
+            <h2 id="savedTop">SAVED</h2>
         </div>
         <div class="col-md-4">
             <a href="https://www.nytimes.com" class="upper-link">NYTIMES.COM</a>
         </div>
     </div>
     <hr class="white-underline">
-    <div class="row">
-        {{#each saved}}
+
+    {{#each saved}}
+    <div class="row article">
         <div class="col-md-6" id="saved">
-            <div class="article">
-                <h2 class="headline">{{headline}}</h2>
-                <ul>
-                    <li>{{summaryOne}}</li>
-                    <li>{{summaryTwo}}</li>
-                </ul>
-                <a href={{link}}>Full Story</a>
-                <form action="/unsave" method="PUT" id="delete-article">
-                    <input type="hidden" name="id" value={{_id}}>
-                    <button class="btn btn-danger btn-sm" type="submit">DELETE</button>
-                    <hr />
-                </form>
-                <form action="/newnote" method="PUT" id="new-note">
-                    <input type="hidden" value={{_id}}>
-                    <input type="name" class="form-control" id="message">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
-            <div id="noteDiv">
-                {{#each note}}
-                <p>{{this}}</p>
-                {{/each}}
+
+            <h2 class="headline">{{headline}}</h2>
+            <ul>
+                <li class="summary">{{summaryOne}}</li>
+                <li class="summary">{{summaryTwo}}</li>
+            </ul>
+            <hr>
+            <div class="row" id="bottom-row">
+                <div class="col-md-6">
+                    <a href={{link}} class="link">FULL STORY</a>
+                </div>
+                <div class="col-md-6">
+                    <form action="/unsave" method="PUT" id="delete-article">
+                        <input type="hidden" name="id" value={{_id}}>
+                        <button class="btn btn-lg" id="deleteBtn" type="submit">DELETE</button>
+                    </form>
+                </div>
             </div>
         </div>
-        {{/each}}
+        <div class="col-md-6" id="newNoteDiv">
+            <form action="/newnote" method="PUT" id="new-note">
+                <input type="hidden" value={{_id}}>
+                <textarea type="name" class="form-control" id="message" placeholder="Record a note..."></textarea>
+                <button type="submit" class="btn btn-lg" id="noteBtn">SUBMIT</button>
+            </form>
+            <div id="noteDiv">
+                <h2 class="savedHeader">Saved Notes</h2>
+                <hr>
+                <ul>
+                {{#each note}}
+                <li>{{this}}</li>
+                {{/each}}
+                </ul>
+            </div>
+        </div>
     </div>
+    {{/each}}
+
 </div>
-</div>
+
 <script>
     $(document).ready(function () {
         $("#new-note").on("submit", function (event) {

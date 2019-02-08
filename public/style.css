@@ -4,6 +4,11 @@ body {
 
 }
 
+#savedTop {
+    color: rgb(65, 161, 190);
+    font-size: 2.5rem;
+}
+
 /* #titleDiv {
     background-color: rgb(243, 243, 235);
 } */
@@ -27,7 +32,11 @@ body {
     margin-right: 30px;
     bottom: 10px;
 }
-
+#delete-article {
+    text-align: right;
+    margin-right: 30px;
+    bottom: 10px;
+}
 li {
     text-align: justify;
 }
@@ -63,11 +72,22 @@ li {
     font-weight: bolder;
 }
 
+#saveBtn:hover {
+    background-color: rgb(105, 195, 223);
+
+}
+
 #scrapeBtn:hover {
     background-color: rgb(127, 215, 241);
 
 }
 
+#deleteBtn {
+    text-align: center;
+    background-color: rgb(190, 65, 82);
+    color: rgb(243, 243, 235);
+    font-weight: bolder;
+}
 
 .headline {
     font-family: "Noto Serif", serif;
@@ -77,6 +97,8 @@ li {
     font-weight: bolder;
 
 }
+
+
 .upper-link {
     color: rgb(65, 161, 190);
     font-size: 1.5rem;
@@ -91,7 +113,7 @@ li {
 }
 .link {
     color: rgba(29, 29, 27, 0.5);
-    font-size: 2rem;
+    font-size: 1.5rem;
     margin-left: 15px;
 }
 .link:hover {
@@ -110,4 +132,35 @@ a:hover {
     text-align: justify;
     margin-top: 20px;
     margin-bottom: 20px;
+}
+
+#new-note {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+#message {
+    margin-bottom: 15px;
+    height: 100px;
+}
+
+#noteBtn {
+    text-align: center;
+    background-color: rgb(65, 161, 190);
+    color: rgb(243, 243, 235);
+    font-weight: bolder;
+}
+
+#noteBtn:hover {
+    background-color: rgb(105, 195, 223);
+
+}
+
+#new-note {
+    text-align: right;
+}
+
+.savedHeader {
+    font-family: "Noto Serif", serif;
+    font-weight: bold;
 }
