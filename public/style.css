@@ -12,7 +12,7 @@ body {
 /* #titleDiv {
     background-color: rgb(243, 243, 235);
 } */
-#linkRow {
+.linkRow {
     text-align: center;
     margin-bottom: 40px;
 }
@@ -132,6 +132,7 @@ a:hover {
     text-align: justify;
     margin-top: 20px;
     margin-bottom: 20px;
+    line-height: 1.5rem;
 }
 
 #new-note {
@@ -163,4 +164,16 @@ a:hover {
 .savedHeader {
     font-family: "Noto Serif", serif;
     font-weight: bold;
+}
+#savedTop {
+    text-align: center;
+    
+    color: rgb(65, 161, 190);
+    font-size: 1.75rem;
+    font-weight: bold;
+    letter-spacing: 1.25rem;
+}
+
+.col-md-4 {
+    text-align: center;
 }
