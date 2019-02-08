@@ -1,18 +1,31 @@
 body {
     background-color: rgb(29, 29, 27);
+    font-family: "Roboto", monospace;
 
 }
 
 /* #titleDiv {
     background-color: rgb(243, 243, 235);
 } */
-
+#linkRow {
+    text-align: center;
+    margin-bottom: 40px;
+}
 #title {
     font-family: "Noto Serif", serif;
     font-size: 7rem;
     color: rgb(243, 243, 235);
     text-align: center;
     padding-top: 30px;
+    margin-bottom: 35px;
+    font-weight: bold;
+
+}
+
+#save-article {
+    text-align: right;
+    margin-right: 30px;
+    bottom: 10px;
 }
 
 li {
@@ -28,37 +41,73 @@ li {
     color: rgb(29, 29, 27);
     background-color: rgb(243, 243, 235);
     border-radius: 3px;
-    min-height: 500px;
+    min-height: 600px;
+    font-size: 1.25rem;
 }
 #scrapeBtn {
     text-align: center;
     width: 300px;
     height: 45px;
     border-radius: 5px;
-    background-color: rgb(186, 222, 233);
+    background-color: rgb(65, 161, 190);
+    color: rgb(29, 29, 27);
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 1.25rem;
 }
-#saved {
-    background-color: lightblue;
+
+#saveBtn {
+    text-align: center;
+    background-color: rgb(65, 161, 190);
+    color: rgb(243, 243, 235);
+    font-weight: bolder;
 }
+
+#scrapeBtn:hover {
+    background-color: rgb(127, 215, 241);
+
+}
+
 
 .headline {
     font-family: "Noto Serif", serif;
-    font-size: 2.5rem;
-    margin-bottom: 25px;
+    font-size: 2.75rem;
+    margin-bottom: 35px;
     margin-left: 15px;
+    font-weight: bolder;
 
 }
 .upper-link {
-    color: rgb(186, 222, 233);
+    color: rgb(65, 161, 190);
     font-size: 1.5rem;
-    padding: 10px;
+    padding: 80px;
+    margin: auto;
+
+}
+
+.upper-link:hover {
+    color: rgb(127, 215, 241);
+
 }
 .link {
-    color: rgb(124, 193, 214);
+    color: rgba(29, 29, 27, 0.5);
+    font-size: 2rem;
+    margin-left: 15px;
+}
+.link:hover {
+    color: rgb(29, 29, 27);
+    
+}
+
+a:hover {
+    text-decoration: none;    
+    color: rgb(184, 234, 250);
 }
 
 .summary {
     margin-left: 0;
     margin-right: 25px;
     text-align: justify;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }

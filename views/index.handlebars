@@ -3,38 +3,48 @@
         <div class="col-md-12" id="titleDiv">
             <h1 id="title">NYTIMES SCRAPER</h1>
         </div>
-        <a href="/saved" class="upper-link">SAVED ARTICLES </a>
-        <a href="https://www.nytimes.com" class="upper-link"> NYTIMES.COM</a>
-        <button id="scrapeBtn">SCRAPE</button>
-
     </div>
+    <div class="row" id="linkRow">
+        <div class="col-md-4">
+            <a href="/saved" class="upper-link">SAVED ARTICLES</a>
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-primary btn-sm" id="scrapeBtn">SCRAPE</button>
+        </div>
+        <div class="col-md-4">
+            <a href="https://www.nytimes.com" class="upper-link">NYTIMES.COM</a>
+        </div>
+    </div>
+
     <hr class="white-underline">
     <div class="row">
         {{#each result}}
         {{#unless saved}}
         <div class="col-md-6">
-            <div id="articles">
-                
-                
-                <div class="article">
-                    <h2 class="headline">{{headline}}</h2>
-                    <ul>
-                        <li class="summary">{{summaryOne}}</li>
-                        <li class="summary">{{summaryTwo}}</li>
-                    </ul>
-                    <hr>
-                    <a href={{link}} class="link">Full Story</a>
-                    <form action="/update" method="PUT" id="save-article">
-                        <input type="hidden" name="id" value={{_id}}>
-                        <button class="btn btn-warning btn-sm" type="submit">SAVE</button>
-                        
-                    </form>
+
+            <div class="article">
+                <h2 class="headline">{{headline}}</h2>
+                <ul>
+                    <li class="summary">{{summaryOne}}</li>
+                    <li class="summary">{{summaryTwo}}</li>
+                </ul>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6">
+                        <a href={{link}} class="link">FULL STORY</a>
+                    </div>
+                    <div class="col-md-6">
+                        <form action="/update" method="PUT" id="save-article">
+                            <input type="hidden" name="id" value={{_id}}>
+                            <button class="btn btn-lg" id="saveBtn" type="submit">SAVE ARTICLE</button>
+                        </form>
+                    </div>
                 </div>
-                
             </div>
+
         </div>
         {{/unless}}
-                {{/each}}
+        {{/each}}
     </div>
 </div>
 

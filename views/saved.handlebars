@@ -1,8 +1,24 @@
 <div class="container">
     <div class="row">
-        <a href="/">Home</a>
+        <div class="col-md-12" id="titleDiv">
+            <h1 id="title">NYTIMES SCRAPER</h1>
+        </div>
+    </div>
+    <div class="row" id="linkRow">
+        <div class="col-md-4">
+            <a href="/" class="upper-link">HOME</a>
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-primary btn-sm" id="scrapeBtn">SCRAPE</button>
+        </div>
+        <div class="col-md-4">
+            <a href="https://www.nytimes.com" class="upper-link">NYTIMES.COM</a>
+        </div>
+    </div>
+    <hr class="white-underline">
+    <div class="row">
+        {{#each saved}}
         <div class="col-md-6" id="saved">
-            {{#each saved}}
             <div class="article">
                 <h2 class="headline">{{headline}}</h2>
                 <ul>
@@ -15,9 +31,9 @@
                     <button class="btn btn-danger btn-sm" type="submit">DELETE</button>
                     <hr />
                 </form>
-                <form action="/newnote" method="PUT"  id="new-note">
-                        <input type="hidden" value={{_id}}>
-                        <input type="name" class="form-control" id="message" >
+                <form action="/newnote" method="PUT" id="new-note">
+                    <input type="hidden" value={{_id}}>
+                    <input type="name" class="form-control" id="message">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
@@ -26,9 +42,10 @@
                 <p>{{this}}</p>
                 {{/each}}
             </div>
-            {{/each}}
         </div>
+        {{/each}}
     </div>
+</div>
 </div>
 <script>
     $(document).ready(function () {
@@ -50,7 +67,7 @@
                 data: data
             })
             location.reload();
-        $("#message").val("");
+            $("#message").val("");
         });
         $("#delete-article").on("click", function (event) {
             event.preventDefault();
@@ -67,6 +84,6 @@
             location.reload();
 
         });
-        
+
     });
 </script>
